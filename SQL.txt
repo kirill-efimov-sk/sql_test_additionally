@@ -1,0 +1,25 @@
+1.
+SELECT *, CONCAT_WS(" ",Client.lastName, Client.firstName, Client.patrName) as 'ФИО пациента',
+CASE 
+ WHEN Client.sex = 0 THEN 'неопределено'
+ WHEN Client.sex = 1 THEN 'М'
+ WHEN Client.sex = 2 THEN 'Ж'
+END,
+Client.birthDate
+FROM sll.Client
+WHERE Client.lastName='Иванов' AND Client.firstName='Иван';
+
+2.
+SELECT Client.lastName,
+  Client.firstName,
+  Client.patrName,
+  Client.birthDate,
+  ClientDocument.serial,
+  ClientDocument.number 
+FROM sll.Client, sll.ClientDocument 
+WHERE Client.lastName='Иванов' AND Client.firstName='Иван' AND ClientDocument.number='Паспорт РФ';
+
+3.
+UPDATE sll.Client 
+SET Client.lastName='Сидоров' 
+WHERE Client.lastName='Иванов' AND Client.firstName='Иван' AND Client.patrName='Иванович';
